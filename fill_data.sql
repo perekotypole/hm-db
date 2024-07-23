@@ -11,10 +11,6 @@ VALUES
 INSERT INTO countries (name)
 VALUES ('Ukraine'), ('USA'), ('UK');
 
-INSERT INTO directors (first_name, last_name) VALUES
-  ('Steven', 'Spielberg'),
-  ('Quentin', 'Tarantino');
-
 INSERT INTO genres (name)
 VALUES ('Action'), ('Comedy'), ('Fantasy');
 

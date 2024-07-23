@@ -7,13 +7,13 @@ WITH movie_data AS (
       'url', f.url
     ) AS poster,
     json_build_object(
-      'id', d.id,
-      'first_name', d.first_name,
-      'last_name', d.last_name
+      'id', p.id,
+      'first_name', p.first_name,
+      'last_name', p.last_name
     ) AS director
   FROM movies m
     LEFT JOIN files f ON f.id = m.poster_id
-    LEFT JOIN directors d ON d.id = m.director_id
+    LEFT JOIN people p ON p.id = m.director_id
   WHERE m.id = 1
 ),
 actors_data AS (

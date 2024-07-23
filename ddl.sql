@@ -59,6 +59,21 @@ CREATE TABLE genres (
   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE people (
+  id SERIAL PRIMARY KEY,
+
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(30),
+  biography TEXT,
+  birth_date DATE,
+  gender VARCHAR(30),
+
+  UNIQUE (first_name, last_name, birth_date),
+
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE movies (
   id SERIAL PRIMARY KEY,
 
@@ -81,19 +96,6 @@ CREATE TABLE movies (
   FOREIGN KEY (director_id) REFERENCES people(id)
 );
 
-CREATE TABLE movies_genres (
-  movie_id INT NOT NULL,
-  genre_id INT NOT NULL,
-
-  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-
-  PRIMARY KEY (movie_id, genre_id),
-  FOREIGN KEY (movie_id) REFERENCES movies(id),
-  FOREIGN KEY (genre_id) REFERENCES genres(id)
-);
-
-
 CREATE TYPE role_type AS ENUM ('leading', 'supporting', 'background');
 
 CREATE TABLE characters (
@@ -107,33 +109,27 @@ CREATE TABLE characters (
   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE people (
-  id SERIAL PRIMARY KEY,
-
-  first_name VARCHAR(30) NOT NULL,
-  last_name VARCHAR(30),
-  biography TEXT,
-  birth_date DATE,
-  gender VARCHAR(30),
-
-  UNIQUE (first_name, last_name, birth_date),
-
-  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE people_photos (
-  id SERIAL PRIMARY KEY,
-
-  photo_id INT NOT NULL,
-  person_id INT NOT NULL,
-  is_primary BOOLEAN DEFAULT FALSE,
-
-  UNIQUE (photo_id, person_id),
+CREATE TABLE movies_genres (
+  movie_id INT NOT NULL,
+  genre_id INT NOT NULL,
 
   createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
+  PRIMARY KEY (movie_id, genre_id),
+  FOREIGN KEY (movie_id) REFERENCES movies(id),
+  FOREIGN KEY (genre_id) REFERENCES genres(id)
+);
+
+CREATE TABLE people_photos (
+  photo_id INT NOT NULL,
+  person_id INT NOT NULL,
+  is_primary BOOLEAN DEFAULT FALSE,
+
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  PRIMARY KEY (photo_id, person_id),
   FOREIGN KEY (photo_id) REFERENCES files(id),
   FOREIGN KEY (person_id) REFERENCES people(id)
 );

@@ -1,0 +1,118 @@
+erDiagram
+    FILES {
+        int id PK
+        varchar(100) filename
+        varchar(50) mime_type
+        text key
+        varchar(150) url
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    USERS {
+        int id PK
+        varchar(30) username UK
+        varchar(30) first_name
+        varchar(30) last_name
+        varchar(50) email UK
+        varchar(30) password
+        int avatar_id FK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    COUNTRIES {
+        int id PK
+        varchar(50) name UK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    GENRES {
+        int id PK
+        varchar(50) name UK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    PEOPLE {
+        int id PK
+        varchar(30) first_name UK
+        varchar(30) last_name UK
+        text biography
+        date birth_date UK
+        varchar(30) gender
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    MOVIES {
+        int id PK
+        varchar(50) title
+        text description
+        money budget
+        date release_date
+        interval duration
+        int poster_id FK
+        int country_id FK
+        int director_id FK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    CHARACTERS {
+        int id PK
+        varchar(100) nmae
+        text description
+        role_type role_type
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    USERS }o--o| FILES: avatar
+    MOVIES }o--o| FILES: poster
+    MOVIES }o--o| COUNTRIES: has
+    MOVIES }o--o| PEOPLE: director
+
+    FAVORITES {
+        int movie_id PK,FK
+        int user_id PK,FK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    MOVIES }o--|| FAVORITES: favorite
+    USERS }o--|| FAVORITES: favorite
+    
+    MOVIES_GENRES {
+        int movie_id PK,FK
+        int genre_id PK,FK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    MOVIES }o--|| MOVIES_GENRES: has
+    GENRES }o--|| MOVIES_GENRES: has
+
+    MOVIES_ROLES {
+        int movie_id PK,FK
+        int character_id PK,FK
+        int person_id PK,FK
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    MOVIES }o--|| MOVIES_ROLES: has
+    PEOPLE }o--|| MOVIES_ROLES: actors
+    CHARACTERS }o--|| MOVIES_ROLES: characters
+    
+    PEOPLE_PHOTOS {
+        int photo_id PK,FK
+        int person_id PK,FK
+        boolean is_primary
+        TIMESTAMP createdAt
+        TIMESTAMP updatedAt
+    }
+
+    PEOPLE }o--|| PEOPLE_PHOTOS: photos
+    FILES }o--|| PEOPLE_PHOTOS: photos

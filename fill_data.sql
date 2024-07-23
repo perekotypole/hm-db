@@ -20,7 +20,7 @@ VALUES ('Action'), ('Comedy'), ('Fantasy');
 
 INSERT INTO movies (title, description, budget, release_date, duration, poster_id, country_id, director_id)
 VALUES
-  ('Movie A', 'An action-packed adventure.', '100000', '2024-07-01', '2 hours', 1, 1, 1),
+  ('Movie A', 'An action-packed adventure.', '100000', '2024-07-01', '3 hours', 1, 1, 1),
   ('Movie B', 'A comedy about friends.', '50000', '2024-08-01', '1.5 hours', 2, 2, 2),
   ('Movie D', null, '150000', '2015-07-01', '2.3 hours', 1, 3, 2);
 

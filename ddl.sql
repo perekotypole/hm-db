@@ -4,9 +4,10 @@ DROP TABLE IF EXISTS
   movies_genres,
   people,
   characters,
-  genres,
   movies,
+  genres,
   countries,
+  directors,
   users,
   files;
 
@@ -49,6 +50,16 @@ CREATE TABLE countries (
   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE directors (
+  id SERIAL PRIMARY KEY,
+
+  first_name VARCHAR(30) NOT NULL,
+  last_name VARCHAR(30),
+
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 CREATE TABLE genres (
   id SERIAL PRIMARY KEY,
 
@@ -68,6 +79,7 @@ CREATE TABLE movies (
   duration INTERVAL,
   poster_id INT,
   country_id INT,
+  director_id INT,
 
   createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -75,7 +87,8 @@ CREATE TABLE movies (
   UNIQUE (title, release_date),
 
   FOREIGN KEY (poster_id) REFERENCES files(id),
-  FOREIGN KEY (country_id) REFERENCES countries(id)
+  FOREIGN KEY (country_id) REFERENCES countries(id),
+  FOREIGN KEY (director_id) REFERENCES directors(id)
 );
 
 CREATE TABLE movies_genres (

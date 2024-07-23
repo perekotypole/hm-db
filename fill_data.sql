@@ -37,6 +37,9 @@ VALUES
   ('Tom', 'Hanks', 'Famous actor known for his roles in various movies.', '1956-07-09', 'Male'),
   ('Emma', 'Watson', 'Actress known for her role in Harry Potter series.', '1990-04-15', 'Female');
 
+INSERT INTO people_photos (photo_id, person_id, is_primary)
+VALUES (1, 1, TRUE), (1, 2, FALSE), (2, 2, FALSE);
+
 INSERT INTO movies_roles (movie_id, character_id, person_id)
 VALUES (1, 1, 1), (1, 2, 2), (2, 2, 1);
 

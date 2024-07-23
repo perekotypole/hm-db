@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS
   favorites,
   movies_roles,
   movies_genres,
+  people_photos,
   people,
   characters,
   movies,
@@ -130,6 +131,22 @@ CREATE TABLE people (
 
   createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE people_photos (
+  id SERIAL PRIMARY KEY,
+
+  photo_id INT NOT NULL,
+  person_id INT NOT NULL,
+  is_primary BOOLEAN DEFAULT FALSE,
+
+  UNIQUE (photo_id, person_id),
+
+  createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updatedAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+  FOREIGN KEY (photo_id) REFERENCES files(id),
+  FOREIGN KEY (person_id) REFERENCES people(id)
 );
 
 CREATE TABLE movies_roles (
